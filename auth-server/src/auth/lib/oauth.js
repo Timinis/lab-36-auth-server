@@ -47,11 +47,11 @@ const authorize = (req) => {
         });
     })
     .then(googleUser => {
-      console.log('\n\n4 - USER FROM GOOGLE: ', googleUser)
+      console.log('\n\n4 - USER FROM GOOGLE: ', googleUser);
       return User.createFromOAuth(googleUser);
     })
     .then(user => {
-      console.log('\n\n5 - USER FROM MONGO: ', user)
+      console.log('\n\n5 - USER FROM MONGO: ', user);
       return user.generateToken();
     })
     .catch(error => runInNewContext(error));
