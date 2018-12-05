@@ -22,7 +22,7 @@
         let googleURL = "https://accounts.google.com/o/oauth2/v2/auth";
 
         let options = {
-            client_id: '',
+            client_id: `${process.env.GOOGLE_CLIENT_ID}`,
             redirect_uri: 'http://localhost:3000/oauth',
             scope: 'email openid profile',
             prompt: 'consent',
@@ -30,12 +30,12 @@
         }
 
         let QueryString = Object.keys(options).map((key, i) => {
-            return `${key}=` + encodeURIComponent(options[key]);
+            return `${key} = ` + encodeURIComponent(options[key]);
         }).join("&");
 
-        let authURL = `${googleURL}?${QueryString}`;
+        let authURL = `${googleURL} ? ${QueryString}`;
 
-        $('#oauth').append(`<a href="${authURL}">Login With Google</a>`);
+        $('#oauth').append(`< a href = "${authURL}" > Login With Google</a >`);
 
     </script>
 
