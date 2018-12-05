@@ -12,7 +12,7 @@ import oauth from './lib/oauth.js';
 authRouter.post('/signup', (req, res, next) => {
   let user = new User(req.body);
   user.save()
-    .then( (user) => {
+    .then((user) => {
       req.token = user.generateToken();
       req.user = user;
       res.cookie('auth', req.token);
@@ -23,6 +23,17 @@ authRouter.post('/signup', (req, res, next) => {
 authRouter.post('/signin', auth, (req, res, next) => {
   res.cookie('auth', req.token);
   res.send(req.token);
+});
+
+// Added a route to handle the oauth route
+authRouter.get('/oauth', (req, res, next) => {
+  oauth.authorize(req)
+    .then(token => {
+      res.send(token);
+    })
+    .catch(next);
+
+
 });
 
 authRouter.get('/oauth', (req, res, next) => {
